@@ -8,7 +8,7 @@ const RightSide = ()=> {
             <textarea className='content'/>
             <div className='action'>
                 <input className='load-text'/>
-                <button className='btn-send'/>
+                <button className='btn-send'>Send</button>
             </div>
         </div>
     );
