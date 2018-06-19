@@ -3,34 +3,35 @@ import './LeftSide.css';
 import {appStore} from "../../helpers/appStore";
 import {Contact} from "../../helpers/serverApi";
 
-
+let result:any[] =[];
 class LeftSide extends React.Component{
     constructor(props:any){
         super(props);
     }
 
-    load = (item:Contact[])=>{
-        return this.loadItem(item);
+    mark = () =>{
+        console.log("hiii");
     };
 
-    loadItem = (item:Contact[])=>{
-        return item.map((item,id)=>{
-            const li = <li key={id}>{item.name}</li>
+    load = (item:Contact[])=>{
+        this.loadItem(item,0 ,null);
+    };
+
+    loadItem = (item:Contact[],spaces:number,parent:any)=>{
+
+         item.map((item,id)=>{
+            const li = <li onClick={this.mark} key={id} style={{paddingLeft: spaces+'em',cursor:'pointer'}}>{item.name}</li>
+             result.push(li);
             if (item.items){
-                this.load(item.items);
+                this.loadItem(item.items,spaces+1,li);
             }
-            return li;
         });
     };
-    /*appStore.contacts.map((item,id)=>{
-               return <li key={id}>{item.name}</li>
-            });*/
 
     render() {
-        const list =this.load(appStore.contacts);
-
+        this.load(appStore.contacts);
         return (
-            <ul className='left-side'>{list}</ul>
+            <ul className='left-side'>{result}</ul>
         );
     }
 };
