@@ -6,7 +6,6 @@ export class AppService {
 
     init(){
         const contacts = getAllContacts();
-        console.log("Data arrived from server",contacts);
         appStore.contacts = contacts;
     }
 
