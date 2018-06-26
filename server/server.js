@@ -10,15 +10,15 @@ const database = {
   users:[
       {
           id:'123',
-          name: 'jhon',
-          email:'john@gmail.com',
-          password:'cookies'
+          name: 'john',
+          password:'cookies',
+          age: '24'
       },
       {
           id:'124',
           name: 'sally',
-          email:'sally@gmail.com',
-          password:'bananas'
+          password:'bananas',
+          age: '30'
       }
   ]
 };
@@ -28,7 +28,7 @@ app.get('/',(req,res) =>{
 });
 
 app.post('/signin', (req,res)=>{
-    if ( req.body.email === database.users[0].email && req.body.password === database.users[0].password) {
+    if ( req.body.name === database.users[0].name && req.body.password === database.users[0].password) {
         res.json('success');
     }else {
         res.status(400).json('error login');
@@ -36,11 +36,11 @@ app.post('/signin', (req,res)=>{
 });
 
 app.post('/register',(req,res)=>{
-    const {email,name,password} = req.body;
+    const {age,name,password} = req.body;
    database.users.push({
        id:'127',
        name: name,
-       email:email,
+       age:age,
        password:password
    });
    res.json(database.users[database.users.length - 1]);
